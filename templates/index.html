@@ -1,89 +1,104 @@
 <!DOCTYPE html>
-<html >
-<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Heart Failure Prediction ML App</title>
-  
-  <link rel="stylesheet"  href="{{ url_for('static', filename='w3.css') }}">
- <style type="text/css">
-    
- .mySlides {display:none;}
-
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heart Failure Prediction | ML App</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='w3.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-
 <body>
 
-<div class='w3-padding w3-teal w3-center'><h1>Heart Failure Prediction ML App</h1></div>
-  <div class="w3-container">
-  <div class="w3-padding-18 w3-content w3-section w3-threequarter">
-</div>
-
+  <!-- Hero Header -->
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Heart Failure Prediction</h1>
+      <p class="subtitle">Machine Learning Powered Health Assessment Tool</p>
+      <div class="badge">Enter your details below to get started</div>
+    </div>
   </div>
-</div>
-</div>
 
-<div class="w3-container">
-  <form class="w3-container w3-card-2" action="{{ url_for('predict')}}"method="POST" style="width: 100%">
-  <h2 class="w3-text-blue w3-center w3-text-teal" >Input Your Details</h2>
-  <p>      
-  <label class="w3-text-teal"><b>Anaemia</b></label>
-  <input id="id1" class="w3-input w3-border" name="anaemia" placeholder="Enter 1 for Anaemic and 0 for not Anaemic" required="required" type="number"></p>
-  <p>      
-  <label class="w3-text-teal"><b>Sex</b></label>
-  <input id="char" class="w3-input w3-border" name="sex" type="number" placeholder="Enter 0 for Female and 1 for Male" required="required" ></p>
-  <label class="w3-text-teal"><b>Age</b></label>
-  <input id="id1" class="w3-input w3-border" name="age" type="number" placeholder="Age" required="required"></p>
-  <p>      
-  <label class="w3-text-teal"><b>Creatinine Phosphokinase Level</b></label>
-  <input id="id1" class="w3-input w3-border" name="creatinine_phos" placeholder="Creatinine Phosphokinase Level" type="number" required="required"></p>
-  <label class="w3-text-teal"><b>Diabetes</b></label>
-  <input id="id1" class="w3-input w3-border" name="diabetes" placeholder="Enter 1 for Diabetic and 0 for Not Diabetic" type="number" required="required"></p>
-  <p>      
-  <label class="w3-text-teal"><b>Ejection Level</b></label>
-  <input id="id1" class="w3-input w3-border" name="ejection" placeholder="Ejection Fraction" type="number" required="required"></p>
-  <p>
-  <p>      
-  <label class="w3-text-teal"><b>Time</b></label>
-  <input id="id1" class="w3-input w3-border" name="time" placeholder="Time" type="number" required="required"></p>
-  <p>          
-            
-    <label class="w3-text-teal"><b>Blood Pressure</b></label>
-    <input id="id1" class="w3-input w3-border" name="hbp" placeholder="Enter 1 for high blood pressure and 0 for low blood pressure" required="required" type="number"></p>
-    <p> 
-    <p>      
-    <label class="w3-text-teal"><b>Platelets</b></label>
-    <input id="id1" class="w3-input w3-border" name="plat" placeholder="Platelets" required="required" type="number"></p>
-    <p> 
-    <p>      
-    <label class="w3-text-teal"><b>Serum Creatinine Level</b></label>
-    <input id="id1" class="w3-input w3-border" name="serum_creatinine" placeholder="Serum Creatinine Level" required="required" type="number"></p>
-    <p> 
-    <p>      
-    <label class="w3-text-teal"><b>Serum Sodium Level</b></label>
-    <input id="id1" class="w3-input w3-border" name="serum_sodium" placeholder="Serum Sodium Level" required="required" type="number"></p>
-    <p> 
-    <p>      
-    <label class="w3-text-teal"><b>Smoking</b></label>
-    <input id="id1" class="w3-input w3-border" name="smoking" placeholder="Enter 1 if you smoke and 0 if you don't smoke" required="required" type="number"></p>
-    <p> 
-  <button onclick="myFunction()" type="submit" class="btn btn-primary btn-block btn-large w3-text-teal w3-border-teal" style="width:100%;">Predict</button>
-</form>
-</div>
+  <!-- Main Content -->
+  <div class="main-container">
+    <div class="form-card">
+      <h2>Patient Health Details</h2>
+      <form action="{{ url_for('predict') }}" method="POST">
+        <div class="form-grid">
 
-    
-   
-   <br>
-   
-   <div class="footer-dark">
-    <footer>
-        <div class="container">
-            <p class='w3-padding w3-teal w3-center'>Made by Ifeanyi Nneji © 2022</p>
+          <div class="form-group">
+            <label for="age"><span class="icon">👤</span> Age</label>
+            <input id="age" class="w3-input" name="age" type="number" placeholder="Enter age" required>
+          </div>
+
+          <div class="form-group">
+            <label for="anaemia"><span class="icon">🩸</span> Anaemia</label>
+            <input id="anaemia" class="w3-input" name="anaemia" type="number" placeholder="1 for Yes, 0 for No" required>
+          </div>
+
+          <div class="form-group">
+            <label for="creatinine_phos"><span class="icon">🧪</span> Creatinine Phosphokinase (mcg/L)</label>
+            <input id="creatinine_phos" class="w3-input" name="creatinine_phos" type="number" placeholder="CPK level" required>
+          </div>
+
+          <div class="form-group">
+            <label for="diabetes"><span class="icon">🍬</span> Diabetes</label>
+            <input id="diabetes" class="w3-input" name="diabetes" type="number" placeholder="1 for Yes, 0 for No" required>
+          </div>
+
+          <div class="form-group">
+            <label for="ejection"><span class="icon">❤️</span> Ejection Fraction (%)</label>
+            <input id="ejection" class="w3-input" name="ejection" type="number" placeholder="Ejection fraction" required>
+          </div>
+
+          <div class="form-group">
+            <label for="hbp"><span class="icon">🩺</span> High Blood Pressure</label>
+            <input id="hbp" class="w3-input" name="hbp" type="number" placeholder="1 for Yes, 0 for No" required>
+          </div>
+
+          <div class="form-group">
+            <label for="plat"><span class="icon">🦠</span> Platelets (kiloplatelets/mL)</label>
+            <input id="plat" class="w3-input" name="plat" type="number" placeholder="Platelet count" required>
+          </div>
+
+          <div class="form-group">
+            <label for="serum_creatinine"><span class="icon">💧</span> Serum Creatinine (mg/dL)</label>
+            <input id="serum_creatinine" class="w3-input" name="serum_creatinine" type="number" placeholder="Creatinine level" required>
+          </div>
+
+          <div class="form-group">
+            <label for="serum_sodium"><span class="icon">🧂</span> Serum Sodium (mEq/L)</label>
+            <input id="serum_sodium" class="w3-input" name="serum_sodium" type="number" placeholder="Sodium level" required>
+          </div>
+
+          <div class="form-group">
+            <label for="sex"><span class="icon">♂️♀️</span> Sex</label>
+            <input id="sex" class="w3-input" name="sex" type="number" placeholder="1 for Male, 0 for Female" required>
+          </div>
+
+          <div class="form-group">
+            <label for="smoking"><span class="icon">🚬</span> Smoking</label>
+            <input id="smoking" class="w3-input" name="smoking" type="number" placeholder="1 for Yes, 0 for No" required>
+          </div>
+
+          <div class="form-group">
+            <label for="time"><span class="icon">⏱️</span> Follow-up Period (days)</label>
+            <input id="time" class="w3-input" name="time" type="number" placeholder="Days" required>
+          </div>
+
+          <button type="submit" class="btn-predict">Predict Heart Failure Risk</button>
         </div>
-    </footer>
-</div>
+      </form>
+    </div>
+  </div>
 
- </div>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Made with <span class="heart">❤️</span> by <span class="made-by">Awais</span> &copy; <span id="year"></span></p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
 </body>
 </html>
